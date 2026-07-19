@@ -1,0 +1,4 @@
+interface:
+  display_name: "html2link Publisher"
+  short_description: "Publish local artifacts as shareable browser links"
+  default_prompt: "Use $html2link to publish this finished artifact and return its public link."

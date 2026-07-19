@@ -2,7 +2,7 @@
 
 Publish agent-generated artifacts to [html2link.dev](https://html2link.dev) and return short browser-friendly links.
 
-This repository contains the `html2link-publish` Agent Skill for Codex, Claude Code, and other tools that support the open `SKILL.md` skill format.
+This repository contains the `html2link` Agent Skill for Codex, Claude Code, and other tools that support the open `SKILL.md` skill format. The older `html2link-publish` directory remains as a compatibility package.
 
 Live html2link example: [html2link.dev/x/yeiEwrKr](https://html2link.dev/x/yeiEwrKr)
 
@@ -16,37 +16,52 @@ Live html2link example: [html2link.dev/x/yeiEwrKr](https://html2link.dev/x/yeiEw
 
 ## Install
 
-Copy the skill folder into your agent's skills directory:
+Copy the skill folder into your agent's skills directory.
+
+Codex project installation:
 
 ```bash
 git clone https://github.com/joohw/html2link-skill.git
-cp -R html2link-skill/html2link-publish ~/.codex/skills/
+mkdir -p .agents/skills
+cp -R html2link-skill/html2link .agents/skills/html2link
 ```
 
-For Claude Code or other compatible agents, copy the same `html2link-publish` folder into that tool's configured skills directory.
+Codex user installation:
+
+```bash
+mkdir -p ~/.agents/skills
+cp -R html2link-skill/html2link ~/.agents/skills/html2link
+```
+
+Claude Code project installation:
+
+```bash
+mkdir -p .claude/skills
+cp -R html2link-skill/html2link .claude/skills/html2link
+```
 
 ## Use
 
 Ask your agent:
 
 ```text
-Use $html2link-publish to publish this HTML report as a shareable link.
+Use $html2link to publish this HTML report as a shareable link.
 ```
 
-Or run the bundled script directly:
+Or anonymously upload a file up to 1 MB directly:
 
 ```bash
-node html2link-publish/scripts/publish-html2link.mjs ./report.html
+curl --fail-with-body -F "file=@./report.html" https://html2link.dev/api/upload
 ```
 
-Set `HTML2LINK_API_TOKEN` for files above the anonymous 1 MB limit.
+The npm CLI adds authenticated uploads, stable-link updates, deletion, listing, and one-command Agent installation.
 
 ## Skill package
 
 The skill lives at:
 
 ```text
-html2link-publish/SKILL.md
+html2link/SKILL.md
 ```
 
 That folder is the portable package to install, mirror, or submit to skill directories.
